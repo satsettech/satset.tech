@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(true);
+  const { theme } = useTheme();
   const threshold = 100;
 
   useEffect(() => {
@@ -110,7 +112,10 @@ const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
           position: absolute;
           width: 100%;
           height: 2px;
-          background: rgba(255, 255, 255, 0.3);
+          background: ${theme === 'dark'
+            ? 'rgba(255, 255, 255, 0.3)'
+            : 'rgba(30, 30, 30, 0.3)'
+          };
           animation: scanline 2s linear infinite;
           z-index: 2;
         }
@@ -128,8 +133,11 @@ const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
         }
 
         .futuristic-bg {
-          background: linear-gradient(rgba(0, 0, 0, 0.99), rgba(0, 0, 0, 0.99)),
-                      url('/images/tech-bg.jpg');
+          background: ${theme === 'dark'
+            ? 'linear-gradient(rgba(0, 0, 0, 0.99), rgba(0, 0, 0, 0.99))'
+            : 'linear-gradient(rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.99))'
+          },
+          url('/images/tech-bg.jpg');
           background-size: cover;
           background-position: center;
           position: absolute;
@@ -143,8 +151,10 @@ const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
           inset: 0;
           background: linear-gradient(
             45deg,
-            rgba(0, 255, 255, 0.1),
-            rgba(255, 0, 255, 0.1)
+            ${theme === 'dark'
+              ? 'rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1)'
+              : 'rgba(0, 0, 0, 0.1), rgba(100, 100, 100, 0.1)'
+            }
           );
           pointer-events: none;
         }
@@ -153,14 +163,24 @@ const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
           0% {
             opacity: 1;
             transform: translateY(0);
-            text-shadow: 0 0 7px #fff,
-                       0 0 10px #fff,
-                       0 0 21px #fff,
-                       0 0 42px #0fa,
-                       0 0 82px #0fa,
-                       0 0 92px #0fa,
-                       0 0 102px #0fa,
-                       0 0 151px #0fa;
+            text-shadow: ${theme === 'dark'
+              ? `0 0 7px #fff,
+               0 0 10px #fff,
+               0 0 21px #fff,
+               0 0 42px #93d,
+               0 0 82px #93d,
+               0 0 92px #93d,
+               0 0 102px #93d,
+               0 0 151px #93d`
+              : `0 0 7px #ddd,
+               0 0 10px #ddd,
+               0 0 21px #ddd,
+               0 0 42px #93d,
+               0 0 82px #93d,
+               0 0 92px #93d,
+               0 0 102px #93d,
+               0 0 151px #93d`
+            };
           }
           50% {
             opacity: 0.5;
@@ -177,29 +197,49 @@ const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
           100% {
             opacity: 1;
             transform: translateY(0);
-            text-shadow: 0 0 7px #fff,
-                       0 0 10px #fff,
-                       0 0 21px #fff,
-                       0 0 42px #0fa,
-                       0 0 82px #0fa,
-                       0 0 92px #0fa,
-                       0 0 102px #0fa,
-                       0 0 151px #0fa;
+            text-shadow: ${theme === 'dark'
+              ? `0 0 7px #fff,
+               0 0 10px #fff,
+               0 0 21px #fff,
+               0 0 42px #93d,
+               0 0 82px #93d,
+               0 0 92px #93d,
+               0 0 102px #93d,
+               0 0 151px #93d`
+              : `0 0 7px #ddd,
+               0 0 10px #ddd,
+               0 0 21px #ddd,
+               0 0 42px #93d,
+               0 0 82px #93d,
+               0 0 92px #93d,
+               0 0 102px #93d,
+               0 0 151px #93d`
+            };
           }
         }
 
         .glitch-arrow {
           font-size: 3rem;
-          color: #fff;
+          color: ${theme === 'dark' ? '#fff' : '#333'};
           animation: arrowGlitch 2s infinite;
-          text-shadow: 0 0 7px #fff,
-                     0 0 10px #fff,
-                     0 0 21px #fff,
-                     0 0 42px #0fa,
-                     0 0 82px #0fa,
-                     0 0 92px #0fa,
-                     0 0 102px #0fa,
-                     0 0 151px #0fa;
+          text-shadow: ${theme === 'dark'
+            ? `0 0 7px #fff,
+               0 0 10px #fff,
+               0 0 21px #fff,
+               0 0 42px #93d,
+               0 0 82px #93d,
+               0 0 92px #93d,
+               0 0 102px #93d,
+               0 0 151px #93d`
+            : `0 0 7px #ddd,
+               0 0 10px #ddd,
+               0 0 21px #ddd,
+               0 0 42px #93d,
+               0 0 82px #93d,
+               0 0 92px #93d,
+               0 0 102px #93d,
+               0 0 151px #93d`
+          };
         }
       `}</style>
 
@@ -207,9 +247,17 @@ const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
 
       <div className="image-container w-64 h-64 relative">
         <Image 
+          src="/images/logo/satset_full_white.png"
+          alt="Welcome"
+          className={`tech-image ${imageLoaded ? 'loaded' : ''} w-full dark:hidden`}
+          width={500}
+          height={500}
+          onLoad={() => setImageLoaded(true)}
+        />
+        <Image
           src="/images/logo/satset_full_black.png"
           alt="Welcome"
-          className={`tech-image ${imageLoaded ? 'loaded' : ''}`}
+          className={`tech-image ${imageLoaded ? 'loaded' : ''} hidden w-full dark:block`}
           width={500}
           height={500}
           onLoad={() => setImageLoaded(true)}
