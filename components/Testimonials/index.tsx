@@ -5,28 +5,28 @@ import SingleTestimonial from "./SingleTestimonial";
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "John D.",
-    designation: "CEO of InnovateCorp",
+    name: "Adam T.",
+    designation: "Founder of Dalkkumi Shop",
     content:
-      "SatsetTech transformed our vision into a reality. Their professionalism and expertise are unmatched!",
+      "SatsetTech transformed our vision into a reality with Dalkkumi Shop. Their expertise in e-commerce solutions made the integration of our product list and cart system seamless. We couldn't be happier with the results!",
     image: "/images/testimonials/auth-01.png",
     star: 5,
   },
   {
     id: 2,
-    name: "David M.",
-    designation: "Founder of GreenTech Solutions",
+    name: "Adrian H.",
+    designation: "CEO of Hilink",
     content:
-      "Working with SatsetTech was a game-changer for our business. Their attention to detail and commitment to quality are second to none.",
+      "Working with SatsetTech on the Hilink project was a game-changer for us. Their attention to detail and innovative approach to adventure scheduling and augmented reality features truly set our app apart.",
     image: "/images/testimonials/auth-02.png",
     star: 5,
   },
   {
     id: 3,
-    name: "Mark T.",
-    designation: "CTO of DigitalWave",
+    name: "Calvin A.",
+    designation: "Founder of Maxleven",
     content:
-      "The team at SatsetTech exceeded our expectations at every turn. Their collaborative approach and technical knowledge ensured the success of our project.",
+      "The team at SatsetTech exceeded our expectations with the Maxleven DISC personality test. Their collaborative approach and technical knowledge ensured we delivered a user-friendly experience that provides valuable insights.",
     image: "/images/testimonials/auth-03.png",
     star: 5,
   },
