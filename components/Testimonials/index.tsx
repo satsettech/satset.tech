@@ -5,7 +5,7 @@ import SingleTestimonial from "./SingleTestimonial";
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "Adam T.",
+    name: "Irene W.",
     designation: "Founder of Dalkkumi Shop",
     content:
       "SatsetTech transformed our vision into a reality with Dalkkumi Shop. Their expertise in e-commerce solutions made the integration of our product list and cart system seamless. We couldn't be happier with the results!",
@@ -14,7 +14,7 @@ const testimonialData: Testimonial[] = [
   },
   {
     id: 2,
-    name: "Adrian H.",
+    name: "Joseph M.",
     designation: "CEO of Hilink",
     content:
       "Working with SatsetTech on the Hilink project was a game-changer for us. Their attention to detail and innovative approach to adventure scheduling and augmented reality features truly set our app apart.",
