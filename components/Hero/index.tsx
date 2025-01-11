@@ -1,9 +1,33 @@
 "use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Loading from "../Loading";
 
 const Hero = () => {
+  const [showLoading, setShowLoading] = useState(true);
+
+  const handleTransitionComplete = () => {
+    // Remove component after animation completes
+    setTimeout(() => {
+      setShowLoading(false);
+    }, 700); // Match the duration in Loading component
+  };
+
+  // Prevent scroll on body while loading is shown
+  useEffect(() => {
+    if (showLoading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showLoading]);
+
   return (
     <>
+      {showLoading && <Loading onScrollComplete={handleTransitionComplete} />}
       <section
         id="home"
         className="relative z-10 overflow-hidden bg-white pb-16 pt-[120px] dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
