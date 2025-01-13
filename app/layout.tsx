@@ -5,12 +5,35 @@ import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/index.css";
+import { useEffect, useState } from "react";
+import Loading from "@/components/Loading";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+  }) {
+  const [showLoading, setShowLoading] = useState(true);
+
+  const handleTransitionComplete = () => {
+    // Remove component after animation completes
+    setTimeout(() => {
+      setShowLoading(false);
+    }, 700); // Match the duration in Loading component
+  };
+
+  // Prevent scroll on body while loading is shown
+  useEffect(() => {
+    if (showLoading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showLoading]);
+
   return (
     <html suppressHydrationWarning lang="en">
       {/*
@@ -20,12 +43,16 @@ export default function RootLayout({
       <head />
 
       <body className={`bg-[#FCFCFC] dark:bg-black`}>
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-          <ScrollToTop />
-        </Providers>
+        {showLoading ? (
+          <Loading onRenderComplete={handleTransitionComplete} />
+        ) : (
+          <Providers>
+            <Header />
+            {children}
+            <Footer />
+            <ScrollToTop />
+          </Providers>
+        )}
       </body>
     </html>
   );

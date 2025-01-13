@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 
-const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
+const Loading = ({ onRenderComplete }: { onRenderComplete: () => void }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(true);
   const { theme } = useTheme();
@@ -19,18 +19,18 @@ const Loading = ({ onScrollComplete }: { onScrollComplete: () => void }) => {
         setScrollProgress(progress);
         
         if (accumulatedScroll >= threshold) {
-          onScrollComplete();
+          onRenderComplete();
         }
       }
     };
 
     window.addEventListener('wheel', handleScroll);
     return () => window.removeEventListener('wheel', handleScroll);
-  }, [onScrollComplete]);
+  }, [onRenderComplete]);
 
   const handleClick = () => {
     setScrollProgress(100);
-    onScrollComplete();
+    onRenderComplete();
   };
 
   return (
